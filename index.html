@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANLA ADVENTURE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#f4ead2;color:#3b2414;line-height:1.7}
+header{
+background:#3a2415;
+padding:20px;
+text-align:center;
+}
+
+.brand{width:700px;max-width:95%}
+
+#topHeader{
+position:relative;
+display:block;
+}
+
+#closeHeader{
+position:absolute;
+right:20px;
+top:10px;
+background:#6d4935;
+color:white;
+border:none;
+border-radius:50%;
+width:35px;
+height:35px;
+cursor:pointer;
+font-size:18px;
+}
+
+nav{margin-top:10px}
+nav a{color:#f5e5b8;text-decoration:none;margin:0 12px;font-weight:bold}
+
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+color:white;
+}
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+animation:slideShow 45s infinite;
+transform:scale(1.1);
+}
+.slide:nth-child(1){background-image:url('images/g1.jpg');animation-delay:0s}
+.slide:nth-child(2){background-image:url('images/g2.jpg');animation-delay:5s}
+.slide:nth-child(3){background-image:url('images/g3.jpg');animation-delay:10s}
+.slide:nth-child(4){background-image:url('images/g4.jpg');animation-delay:15s}
+.slide:nth-child(5){background-image:url('images/g5.jpg');animation-delay:20s}
+.slide:nth-child(6){background-image:url('images/g6.jpg');animation-delay:25s}
+.slide:nth-child(7){background-image:url('images/g7.jpg');animation-delay:30s}
+.slide:nth-child(8){background-image:url('images/g8.jpg');animation-delay:35s}
+.slide:nth-child(9){background-image:url('images/g9.jpg');animation-delay:40s}
+
+@keyframes slideShow{
+0%{opacity:0;transform:scale(1.1)}
+5%{opacity:1}
+15%{opacity:1}
+20%{opacity:0}
+100%{opacity:0}
+}
+
+.overlay{
+position:relative;
+z-index:2;
+background:rgba(0,0,0,.35);
+padding:40px;
+border-radius:25px;
+max-width:850px;
+}
+.overlay h1{font-size:68px}
+.overlay p{font-size:20px;margin-top:15px}
+.hero-logo{width:220px;margin-bottom:20px}
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:15px 32px;
+background:#6d4935;
+color:#f5e5b8;
+text-decoration:none;
+border-radius:14px;
+}
+
+section{padding:100px 10%}
+h2{font-size:42px;margin-bottom:25px}
+
+.card,.guide-card,.review-box,.booking-box{
+background:white;
+padding:35px;
+border-radius:24px;
+margin-bottom:30px;
+box-shadow:0 10px 25px rgba(0,0,0,.08)
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px
+}
+.gallery img{
+width:100%;
+height:260px;
+object-fit:cover;
+border-radius:20px;
+cursor:pointer;
+transition:.3s
+}
+.gallery img:hover{transform:scale(1.03)}
+
+.guide-photo{
+width:100%;
+max-width:420px;
+border-radius:20px;
+margin-bottom:20px
+}
+
+input,select,textarea{
+width:100%;
+padding:16px;
+margin-bottom:18px;
+border-radius:14px;
+border:1px solid #ddd
+}
+textarea{height:140px}
+
+.modal{
+display:none;
+position:fixed;
+left:0;top:0;
+width:100%;height:100%;
+background:rgba(0,0,0,.92);
+justify-content:center;
+align-items:center;
+z-index:9999
+}
+.modal img{
+max-width:90%;
+max-height:90%;
+border-radius:20px
+}
+
+footer{
+background:#3a2415;
+color:white;
+text-align:center;
+padding:35px
+}
+
+@media(max-width:768px){
+.overlay h1{font-size:42px}
+.brand{width:95%}
+}
+</style>
+</head>
+<body>
+
+<header>
+
+<div id="topHeader">
+    <button id="closeHeader" onclick="document.getElementById('topHeader').style.display='none'">✕</button>
+    <img src="images/brand.png" class="brand">
+</div>
+
+<nav>
+<a href="#about">About</a>
+<a href="#packages">Packages</a>
+<a href="#gallery">Gallery</a>
+<a href="#booking">Booking</a>
+<a href="#guides">Guides</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+<div class="slide"></div>
+
+<div class="overlay">
+<img src="images/logo.png" class="hero-logo">
+<h1>Hidden North Experience</h1>
+<p>Explore North Sulawesi through wildlife adventures, rainforest journeys, birding experiences, and authentic local culture.</p>
+<a href="#booking" class="btn">Book Your Adventure</a>
+</div>
+</section>
+
+<section id="about">
+<h2>About CANLA ADVENTURE</h2>
+<div class="card">
+<p>CANLA ADVENTURE has been working in the tourism and guiding industry in North Sulawesi since around 2017. At that time there was no official name and no plan to create a travel brand like today.</p><br>
+<p>Over the years, CANLA ADVENTURE has professionally handled many guests from Indonesia and from countries around the world. From wildlife photographers to families and adventure travelers, our team has experience creating safe and unforgettable journeys.</p><br>
+<p>Although the name CANLA ADVENTURE was officially created in 2023, it is only now being publicly introduced as a professional local travel experience.</p>
+</div>
+</section>
+
+<section id="packages">
+<h2>Travel Packages</h2>
+
+<div class="card"><h3>Tangkoko Wildlife Tour</h3><p>Discover Sulawesi Crested Black Macaque, Tarsius Spectral Gursky, Bear Cuscus, and Knobbed Hornbill.</p></div>
+
+<div class="card"><h3>Tangkoko Birding Tour</h3><p>Special birdwatching experience focused on endemic birds from Tangkoko Nature Reserve.</p></div>
+
+<div class="card"><h3>Tangkoko Boat Tour Mangrove & Hot Spring</h3><p>Mangrove exploration combined with relaxing hot spring experiences and coastal scenery.</p></div>
+
+<div class="card"><h3>Batuangus & Dolphin Seek Tour</h3><p>Enjoy sunrise moments and search for dolphins around North Sulawesi coastline.</p></div>
+
+<div class="card"><h3>Tomohon & Tondano Highland Tour</h3><p>Explore volcano landscapes, mountain atmosphere, lakes, flower gardens, and local culture.</p></div>
+</section>
+
+<section id="gallery">
+<h2>Gallery</h2>
+<div class="gallery">
+<img src="images/g1.jpg" onclick="openModal(this)">
+<img src="images/g2.jpg" onclick="openModal(this)">
+<img src="images/g3.jpg" onclick="openModal(this)">
+<img src="images/g4.jpg" onclick="openModal(this)">
+<img src="images/g5.jpg" onclick="openModal(this)">
+<img src="images/g6.jpg" onclick="openModal(this)">
+<img src="images/g7.jpg" onclick="openModal(this)">
+<img src="images/g8.jpg" onclick="openModal(this)">
+<img src="images/g9.jpg" onclick="openModal(this)">
+</div>
+</section>
+
+<section id="gallery">
+
+<h2>Gallery</h2>
+
+<div class="gallery">
+
+<div class="gallery-item empty">
+<span>Gallery Coming Soon</span>
+</div>
+
+<div class="gallery-item image-item">
+<img src="hornbill.jpg" onclick="openModal(this)">
+</div>
+
+<div class="gallery-item empty">
+<span>Gallery Coming Soon</span>
+</div>
+
+<div class="gallery-item empty">
+<span>Gallery Coming Soon</span>
+</div>
+
+</div>
+
+</section>
+
+<section id="booking">
+
+<h2>Book Your Tour</h2>
+
+<div class="booking-box">
+
+<form id="bookingForm">
+
+<input type="text" id="fullname" placeholder="Full Name" required>
+
+<input type="text" id="country" placeholder="Country">
+
+<input type="email" id="email" placeholder="Email Address">
+
+<input type="text" id="whatsapp" placeholder="WhatsApp Number">
+
+<select id="package">
+<option>Tangkoko Wildlife Tour</option>
+<option>Tangkoko Birding Tour</option>
+<option>Tangkoko Boat Tour Mangrove & Hot Spring</option>
+<option>Batuangus & Dolphin Seek Tour</option>
+<option>Tomohon & Tondano Highland Tour</option>
+<option>Custom Trip</option>
+</select>
+
+<input type="date" id="date">
+
+<input type="number" id="participants" placeholder="Number of Participants">
+
+<div class="check-options">
+<label><input type="checkbox" id="pickup"> Airport Pickup</label>
+<label><input type="checkbox" id="hotel"> Hotel Included</label>
+<label><input type="checkbox" id="custom"> Custom Trip</label>
+</div>
+
+<textarea id="request" placeholder="Special Request"></textarea>
+
+<button type="button" class="btn" onclick="sendWhatsApp()">
+Book Via WhatsApp
+</button>
+
+</form>
+
+</div>
+
+<section id="guides">
+<h2>Our Guides</h2>
+
+<div class="guide-card">
+<h3>Ober Kakauhe</h3>
+<p>Highly experienced local guide specializing in Wildlife Tours, Boat Tours, Dolphin Seek Tours, and Batuangus coastal experiences. Fluent in English and known for his friendly personality, humor, and warm smile.</p>
+</div>
+
+<div class="guide-card">
+<img src="images/fabbyo.jpg" class="guide-photo">
+<h3>Fabbyo Kakauhe</h3>
+<p>Professional and experienced guide specializing in Wildlife Tours and Tomohon & Tondano Highland Tours. Fluent in English and well-known for his cheerful personality, humor, and friendly approach to guests.</p>
+</div>
+
+</section>
+
+<section id="review">
+<h2>Guest Rating & Review</h2>
+<div class="review-box">
+<h3>⭐⭐⭐⭐⭐ 5.0 Experience Rating</h3>
+<textarea placeholder="Write your review here..."></textarea>
+<a class="btn">Submit Review</a>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<div class="card">
+<p><strong>WhatsApp:</strong><br>
++62 857-5392-9818<br>
++62 821-5670-1902</p><br>
+
+<p><strong>Email:</strong><br>
+fabiokakauhe@gmail.com<br>
+sheillaamanda186@gmail.com<br>
+canlaadventure@gmail.com</p>
+</div>
+</section>
+
+<div id="modal" class="modal" onclick="closeModal()">
+<img id="modal-img">
+</div>
+
+<footer>
+© 2026 CANLA ADVENTURE — Hidden North Experience
+</footer>
+
+<script>
+function openModal(img){
+document.getElementById('modal').style.display='flex';
+document.getElementById('modal-img').src=img.src;
+}
+function closeModal(){
+document.getElementById('modal').style.display='none';
+}
+</script>
+
+</body>
+</html>
