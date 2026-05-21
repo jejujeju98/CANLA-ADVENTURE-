@@ -843,6 +843,13 @@ function closeModal(){
 document.getElementById("modal").style.display = "none";
 }
 
+function closeHeader(){
+const header = document.getElementById("headerModal");
+if(header){
+header.style.display = "none";
+}
+}
+
 window.addEventListener("load", function(){
 
 setTimeout(function(){
@@ -850,10 +857,13 @@ setTimeout(function(){
 const loader = document.getElementById("loader");
 
 if(loader){
+
 loader.style.opacity = "0";
 
 setTimeout(function(){
+
 loader.style.display = "none";
+
 }, 500);
 
 }
@@ -873,9 +883,9 @@ const rating = document.getElementById("reviewRating").value;
 const text = document.getElementById("reviewText").value;
 
 const today = new Date().toLocaleDateString("en-US", {
-year: "numeric",
-month: "long",
-day: "numeric"
+year:"numeric",
+month:"long",
+day:"numeric"
 });
 
 if(name === "" || country === "" || text === ""){
@@ -895,20 +905,18 @@ border-radius:20px;
 margin-top:20px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 ">
-
 <h4>${rating} ${name} — ${country}</h4>
-
 <small>${today}</small>
-
 <p>${text}</p>
-
 </div>
 `;
 
 reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
+
 document.getElementById("reviewCountry").value = "";
+
 document.getElementById("reviewText").value = "";
 
 }
@@ -917,9 +925,11 @@ let reviewsOpen = false;
 
 function toggleReviews(){
 
-const reviewList = document.getElementById("reviewList");
+const reviewList =
+document.getElementById("reviewList");
 
-const btn = document.getElementById("reviewBtn");
+const btn =
+document.getElementById("reviewBtn");
 
 if(reviewsOpen){
 
@@ -931,7 +941,8 @@ reviewsOpen = false;
 
 }else{
 
-reviewList.style.maxHeight = "10000px";
+reviewList.style.maxHeight =
+reviewList.scrollHeight + "px";
 
 btn.innerText = "Hide Reviews";
 
@@ -940,6 +951,26 @@ reviewsOpen = true;
 }
 
 }
+
+const reveals = document.querySelectorAll(
+'.reveal, .reveal-left, .reveal-right'
+);
+
+window.addEventListener('scroll', ()=>{
+
+reveals.forEach((el)=>{
+
+const top = el.getBoundingClientRect().top;
+
+if(top < window.innerHeight - 100){
+
+el.classList.add('active');
+
+}
+
+});
+
+});
 
 </script>
 
