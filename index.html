@@ -884,7 +884,7 @@ reviewList.prepend(newReview);
 document.getElementById("reviewName").value = "";
 document.getElementById("reviewText").value = "";
 
-}function toggleReviews(){
+function toggleReviews(){
 
 const reviewList =
 document.getElementById("reviewList");
@@ -895,11 +895,13 @@ document.getElementById("reviewBtn");
 if(reviewList.classList.contains("showReviews")){
 
 reviewList.classList.remove("showReviews");
+
 btn.innerText = "Show More Reviews";
 
 }else{
 
 reviewList.classList.add("showReviews");
+
 btn.innerText = "Hide Reviews";
 
 }
