@@ -517,8 +517,9 @@ placeholder="Write your review here..."></textarea>
 Submit Review
 </button>
 
-<div id="reviewList">
-    <div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+<div id="reviewList" style="max-height:700px; overflow:hidden;">
+
+ <div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
 <h4>⭐⭐⭐⭐⭐ Daniel — Germany</h4>
 <small>May 14, 2023</small>
 <p>Amazing wildlife experience! We saw tarsiers, black macaques, hornbills, and even bear cuscus in one tour. Highly recommended local guides.</p>
@@ -793,7 +794,11 @@ Submit Review
 <small>April 14, 2026</small>
 <p>Everything was smooth from booking to the tour itself. One of the best wildlife trips I've had.</p>
 </div>
-
+    
+<button class="btn" onclick="toggleReviews()" id="reviewBtn">
+Show More Reviews
+</button>
+    
 </div>
 
 </section>
@@ -873,6 +878,36 @@ reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
 document.getElementById("reviewText").value = "";
+
+}
+
+let reviewsOpen = false;
+
+function toggleReviews(){
+
+const reviewList =
+document.getElementById("reviewList");
+
+const btn =
+document.getElementById("reviewBtn");
+
+if(reviewsOpen){
+
+reviewList.style.maxHeight = "700px";
+
+btn.innerText = "Show More Reviews";
+
+reviewsOpen = false;
+
+}else{
+
+reviewList.style.maxHeight = "10000px";
+
+btn.innerText = "Hide Reviews";
+
+reviewsOpen = true;
+
+}
 
 }
 
