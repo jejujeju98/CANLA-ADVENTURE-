@@ -854,10 +854,11 @@ document.getElementById("loader").style.display = "none";
 });
 
 function addReview(){
+function addReview(){
 
 const name = document.getElementById("reviewName").value;
 
-const name = document.getElementById("reviewCountry").value = "";
+const country = document.getElementById("reviewCountry").value;
 
 const rating = document.getElementById("reviewRating").value;
 
@@ -869,7 +870,7 @@ month: "long",
 day: "numeric"
 });
 
-if(name === "" || text === ""){
+if(name === "" || country === "" || text === ""){
 
 alert("Please fill all fields");
 
