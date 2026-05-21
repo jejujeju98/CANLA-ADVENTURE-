@@ -501,6 +501,7 @@ window.open(whatsappURL, '_blank');
 <h3>Share Your Experience</h3>
 
 <input type="text" id="reviewName" placeholder="Your Name">
+<input type="text" id="reviewCountry" placeholder="Your Country">
 
 <select id="reviewRating">
 <option value="⭐">⭐ 1 Star</option>
@@ -856,9 +857,17 @@ function addReview(){
 
 const name = document.getElementById("reviewName").value;
 
+const name = document.getElementById("reviewCountry").value = "";
+
 const rating = document.getElementById("reviewRating").value;
 
 const text = document.getElementById("reviewText").value;
+
+const today = new Date().toLocaleDateString("en-US", {
+year: "numeric",
+month: "long",
+day: "numeric"
+});
 
 if(name === "" || text === ""){
 
@@ -881,7 +890,9 @@ margin-top:20px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 ">
 
-<h4>${rating} ${name}</h4>
+<h4>${rating} ${name} — ${country}</h4>
+
+<small>${today}</small>
 
 <p>${text}</p>
 
