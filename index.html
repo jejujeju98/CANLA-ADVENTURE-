@@ -833,27 +833,24 @@ canlaadventure@gmail.com</p>
 <script>
 
 function openModal(img){
-document.getElementById('modal').style.display='flex';
-document.getElementById('modal-img').src=img.src;
+document.getElementById("modal").style.display = "flex";
+document.getElementById("modal-img").src = img.src;
 }
 
 function closeModal(){
-document.getElementById('modal').style.display='none';
+document.getElementById("modal").style.display = "none";
 }
 
 window.addEventListener("load", function(){
-
-document.getElementById("loader").style.opacity = "0";
 
 setTimeout(function(){
 
 document.getElementById("loader").style.display = "none";
 
-}, 5000);
+}, 1000);
 
 });
 
-function addReview(){
 function addReview(){
 
 const name = document.getElementById("reviewName").value;
@@ -904,6 +901,8 @@ reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
 
+document.getElementById("reviewCountry").value = "";
+
 document.getElementById("reviewText").value = "";
 
 }
@@ -912,11 +911,9 @@ let reviewsOpen = false;
 
 function toggleReviews(){
 
-const reviewList =
-document.getElementById("reviewList");
+const reviewList = document.getElementById("reviewList");
 
-const btn =
-document.getElementById("reviewBtn");
+const btn = document.getElementById("reviewBtn");
 
 if(reviewsOpen){
 
@@ -939,6 +936,5 @@ reviewsOpen = true;
 }
 
 </script>
-
 </body>
 </html>
