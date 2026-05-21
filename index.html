@@ -919,6 +919,87 @@ if(reviewsOpen){
 
 reviewList.style.maxHeight = "700px";
 
+<script>
+
+function openModal(img){
+document.getElementById("modal").style.display = "flex";
+document.getElementById("modal-img").src = img.src;
+}
+
+function closeModal(){
+document.getElementById("modal").style.display = "none";
+}
+
+window.onload = function(){
+
+const loader = document.getElementById("loader");
+
+if(loader){
+loader.style.display = "none";
+}
+
+};
+
+function addReview(){
+
+const name = document.getElementById("reviewName").value;
+const country = document.getElementById("reviewCountry").value;
+const rating = document.getElementById("reviewRating").value;
+const text = document.getElementById("reviewText").value;
+
+const today = new Date().toLocaleDateString("en-US", {
+year: "numeric",
+month: "long",
+day: "numeric"
+});
+
+if(name === "" || country === "" || text === ""){
+alert("Please fill all fields");
+return;
+}
+
+const reviewList = document.getElementById("reviewList");
+
+const newReview = document.createElement("div");
+
+newReview.innerHTML = `
+<div style="
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+">
+
+<h4>${rating} ${name} — ${country}</h4>
+
+<small>${today}</small>
+
+<p>${text}</p>
+
+</div>
+`;
+
+reviewList.prepend(newReview);
+
+document.getElementById("reviewName").value = "";
+document.getElementById("reviewCountry").value = "";
+document.getElementById("reviewText").value = "";
+
+}
+
+let reviewsOpen = false;
+
+function toggleReviews(){
+
+const reviewList = document.getElementById("reviewList");
+
+const btn = document.getElementById("reviewBtn");
+
+if(reviewsOpen){
+
+reviewList.style.maxHeight = "700px";
+
 btn.innerText = "Show More Reviews";
 
 reviewsOpen = false;
