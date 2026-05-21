@@ -943,8 +943,11 @@ loader.style.display = "none";
 function addReview(){
 
 const name = document.getElementById("reviewName").value;
+
 const country = document.getElementById("reviewCountry").value;
+
 const rating = document.getElementById("reviewRating").value;
+
 const text = document.getElementById("reviewText").value;
 
 const today = new Date().toLocaleDateString("en-US", {
@@ -983,7 +986,9 @@ box-shadow:0 5px 15px rgba(0,0,0,0.1);
 reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
+
 document.getElementById("reviewCountry").value = "";
+
 document.getElementById("reviewText").value = "";
 
 }
@@ -1016,6 +1021,7 @@ reviewsOpen = true;
 
 }
 
+</script>
 </script>
 </body>
 </html>
