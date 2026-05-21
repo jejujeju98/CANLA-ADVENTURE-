@@ -240,6 +240,14 @@ transform:scale(1.05);
 opacity:1;
 }
 }
+.hiddenReviews{
+max-height:600px;
+overflow:hidden;
+}
+
+.showReviews{
+max-height:10000px;
+}
 </style>
 </head>
 <body>
@@ -516,7 +524,7 @@ placeholder="Write your review here..."></textarea>
 Submit Review
 </button>
 
-<div id="reviewList">
+<div id="reviewList" class="hiddenReviews">
     <div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
 <h4>⭐⭐⭐⭐⭐ Daniel — Germany</h4>
 <small>May 14, 2023</small>
@@ -794,6 +802,9 @@ Submit Review
 </div>
 
 </div>
+<button class="btn" onclick="toggleReviews()" id="reviewBtn">
+Show More Reviews
+</button>
 
 </section>
 
@@ -872,6 +883,26 @@ reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
 document.getElementById("reviewText").value = "";
+
+}function toggleReviews(){
+
+const reviewList =
+document.getElementById("reviewList");
+
+const btn =
+document.getElementById("reviewBtn");
+
+if(reviewList.classList.contains("showReviews")){
+
+reviewList.classList.remove("showReviews");
+btn.innerText = "Show More Reviews";
+
+}else{
+
+reviewList.classList.add("showReviews");
+btn.innerText = "Hide Reviews";
+
+}
 
 }
 
