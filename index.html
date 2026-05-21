@@ -830,13 +830,16 @@ canlaadventure@gmail.com</p>
 </footer>
 
 <script>
+
 function openModal(img){
 document.getElementById('modal').style.display='flex';
 document.getElementById('modal-img').src=img.src;
 }
+
 function closeModal(){
 document.getElementById('modal').style.display='none';
 }
+
 window.addEventListener("load", function(){
 
 document.getElementById("loader").style.opacity = "0";
@@ -845,17 +848,24 @@ setTimeout(function(){
 
 document.getElementById("loader").style.display = "none";
 
-},5000);
+}, 5000);
+
+});
 
 function addReview(){
 
 const name = document.getElementById("reviewName").value;
+
 const rating = document.getElementById("reviewRating").value;
+
 const text = document.getElementById("reviewText").value;
 
 if(name === "" || text === ""){
+
 alert("Please fill all fields");
+
 return;
+
 }
 
 const reviewList = document.getElementById("reviewList");
@@ -881,6 +891,7 @@ box-shadow:0 5px 15px rgba(0,0,0,0.1);
 reviewList.prepend(newReview);
 
 document.getElementById("reviewName").value = "";
+
 document.getElementById("reviewText").value = "";
 
 }
@@ -912,7 +923,9 @@ btn.innerText = "Hide Reviews";
 reviewsOpen = true;
 
 }
+
 }
+
 </script>
 
 </body>
