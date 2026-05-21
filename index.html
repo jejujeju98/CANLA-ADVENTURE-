@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CANLA ADVENTURE</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>CANLA Adventure</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -13,26 +11,76 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-scroll-behavior:smooth;
 font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
-#loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#3a2415;color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:99999;transition:1s;}#loader h1{font-size:42px;}#loader p{margin-top:10px;opacity:.7;}body{
-background:#efe6cf;
-color:#3a2415;
+body{
+background:#efe6d0;
+color:#2b160d;
 overflow-x:hidden;
 }
 
-header{
-position:sticky;
+#welcomePopup{
+position:fixed;
 top:0;
-z-index:999;
+left:0;
+width:100%;
+height:100%;
+background:#4a250f;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999999;
+transition:1s;
+}
+
+.popup-logo{
+width:300px;
+max-width:80%;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+animation:zoomIn 1.2s ease;
+}
+
+#welcomePopup h1{
+color:white;
+margin-top:20px;
+font-size:48px;
+}
+
+#welcomePopup p{
+color:white;
+opacity:0.8;
+}
+
+#closePopup{
+position:absolute;
+top:20px;
+right:20px;
+width:45px;
+height:45px;
+border:none;
+border-radius:50%;
+background:rgba(255,255,255,0.2);
+color:white;
+font-size:20px;
+cursor:pointer;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
+padding:15px;
+z-index:9999;
 display:flex;
 justify-content:center;
-gap:20px;
-padding:18px;
-background:rgba(58,36,21,0.92);
-backdrop-filter:blur(10px);
+gap:18px;
+flex-wrap:wrap;
 }
 
 header a{
@@ -44,277 +92,248 @@ font-weight:600;
 
 .hero{
 height:100vh;
-background:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1200&auto=format&fit=crop') center/cover;
-display:flex;
-align-items:center;
-justify-content:center;
 position:relative;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
-.hero::before{
-content:'';
+.slide{
 position:absolute;
-inset:0;
-background:rgba(0,0,0,0.45);
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:1.5s;
+}
+
+.slide.active{
+opacity:1;
 }
 
 .overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+}
+
+.hero-content{
 position:relative;
-text-align:center;
+z-index:2;
 color:white;
-padding:30px;
+padding:20px;
 animation:fadeUp 1.5s ease;
 }
 
-.logo{
-width:180px;
+.hero-logo{
+width:170px;
 border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+animation:float 4s infinite ease-in-out;
+}
+
+.hero h1{
+font-size:56px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
 margin-bottom:25px;
-box-shadow:0 15px 35px rgba(0,0,0,0.4);
 }
 
-.overlay h1{
-font-size:55px;
-margin-bottom:15px;
+.hero-btn{
+display:inline-block;
+padding:14px 28px;
+background:white;
+color:#4a250f;
+text-decoration:none;
+font-weight:bold;
+border-radius:40px;
+transition:0.4s;
 }
 
-.overlay p{
-max-width:700px;
-line-height:1.8;
-font-size:18px;
-margin:auto;
+.hero-btn:hover{
+transform:translateY(-5px);
 }
 
 section{
 padding:100px 8%;
 }
 
-h2{
-font-size:42px;
+.section-title{
+font-size:40px;
 margin-bottom:40px;
 }
 
-.about-box,
-.booking-box,
-.contact-box,
-.guide-card,
-.package-card{
+.card{
 background:white;
-padding:35px;
-border-radius:28px;
+padding:25px;
+border-radius:25px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
+margin-bottom:30px;
 transition:0.4s;
 }
 
-.about-box:hover,
-.booking-box:hover,
-.contact-box:hover,
-.guide-card:hover,
-.package-card:hover{
-transform:translateY(-10px);
-box-shadow:0 20px 45px rgba(0,0,0,0.15);
+.card:hover{
+transform:translateY(-8px);
 }
 
-.about-box p{
-line-height:2;
-margin-bottom:20px;
-}
-
-.packages-grid{
+.tour-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
 }
 
-.package-card h3{
-margin-bottom:15px;
+.tour-card{
+position:relative;
+overflow:hidden;
+border-radius:25px;
+cursor:pointer;
 }
 
-.package-card p{
-line-height:1.8;
-}
-
-.gallery-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:20px;
-}
-
-.gallery-grid img{
+.tour-card img{
 width:100%;
 height:260px;
 object-fit:cover;
-border-radius:25px;
 transition:0.5s;
-box-shadow:0 10px 25px rgba(0,0,0,0.12);
 }
 
-.gallery-grid img:hover{
-transform:scale(1.05) rotate(1deg);
+.tour-card:hover img{
+transform:scale(1.1);
 }
 
-.booking-box input,
-.booking-box select,
-.booking-box textarea{
+.tour-info{
+position:absolute;
+bottom:0;
+left:0;
 width:100%;
-padding:16px;
-margin-bottom:18px;
-border-radius:14px;
-border:1px solid #ddd;
-font-size:15px;
-}
-
-.booking-box textarea{
-height:140px;
-resize:none;
-}
-
-.btn{
-background:#6f472d;
+padding:20px;
+background:linear-gradient(transparent,rgba(0,0,0,0.8));
 color:white;
-border:none;
-padding:15px 28px;
-border-radius:14px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:20px;
 cursor:pointer;
-font-weight:600;
 transition:0.4s;
 }
 
-.btn:hover{
-background:#8b5c42;
+.gallery img:hover{
 transform:scale(1.05);
 }
 
-.guides-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-
-.guide-card img{
+#modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
 width:100%;
-height:360px;
-object-fit:cover;
-border-radius:22px;
-margin-bottom:20px;
-transition:0.4s;
+height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:999999;
 }
 
-.guide-card img:hover{
-transform:scale(1.03);
+#modal img{
+max-width:95%;
+max-height:95%;
+border-radius:20px;
 }
 
-.guide-card p{
-line-height:1.8;
+#modalClose{
+position:absolute;
+top:20px;
+right:20px;
+font-size:35px;
+color:white;
+cursor:pointer;
 }
 
-.review-slider{
+.review-wrapper{
 overflow:hidden;
-margin-top:50px;
+position:relative;
 }
 
 .review-track{
 display:flex;
-gap:25px;
-width:max-content;
-animation:scrollReview 40s linear infinite;
+gap:20px;
+animation:slideReview 45s linear infinite;
 }
 
-.review-card{
-background:white;
+.review{
 min-width:320px;
-max-width:320px;
-padding:30px;
-border-radius:28px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:0.4s;
-}
-
-.review-card:hover{
-transform:translateY(-10px) scale(1.03);
-}
-
-.review-card h4{
-margin-bottom:10px;
-}
-
-.review-card small{
-opacity:0.6;
-}
-
-.review-card p{
-margin-top:15px;
-line-height:1.8;
-}
-
-.review-form{
 background:white;
-padding:35px;
-border-radius:28px;
-margin-top:60px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.review-form input,
-.review-form select,
-.review-form textarea{
+.review small{
+opacity:0.7;
+}
+
+form input,
+form textarea,
+form select{
 width:100%;
-padding:16px;
-margin-bottom:18px;
-border-radius:14px;
-border:1px solid #ddd;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:15px;
+background:#f5f5f5;
 }
 
-.review-form textarea{
-height:140px;
-resize:none;
+form button{
+padding:15px 25px;
+border:none;
+border-radius:15px;
+background:#4a250f;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
-.contact-box p{
-line-height:2;
+.contact-box{
+background:white;
+padding:30px;
+border-radius:25px;
 }
 
 footer{
-background:#4d2d18;
+background:#4a250f;
 color:white;
 text-align:center;
 padding:30px;
-margin-top:80px;
-}
-
-.reveal,
-.reveal-left,
-.reveal-right,
-.pop-up{
-opacity:0;
-transition:1s all ease;
 }
 
 .reveal{
-transform:translateY(80px);
+opacity:0;
+transform:translateY(60px);
+transition:1s;
 }
 
-.reveal-left{
-transform:translateX(-80px);
-}
-
-.reveal-right{
-transform:translateX(80px);
-}
-
-.pop-up{
-transform:scale(0.8);
-}
-
-.reveal.active,
-.reveal-left.active,
-.reveal-right.active,
-.pop-up.active{
+.reveal.active{
 opacity:1;
-transform:translate(0) scale(1);
+transform:translateY(0);
 }
 
-@keyframes scrollReview{
+@keyframes slideReview{
 0%{
 transform:translateX(0);
 }
@@ -328,1256 +347,244 @@ from{
 opacity:0;
 transform:translateY(40px);
 }
-
 to{
 opacity:1;
 transform:translateY(0);
 }
 }
 
-@media(max-width:768px){
-
-header{
-flex-wrap:wrap;
-gap:12px;
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
 }
 
-.overlay h1{
-font-size:40px;
+@keyframes zoomIn{
+from{
+opacity:0;
+transform:scale(0.5);
 }
-
-h2{
-font-size:34px;
+to{
+opacity:1;
+transform:scale(1);
 }
-
-.review-card{
-min-width:280px;
-}
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-<h1>CANLA ADVENTURE</h1>
-<p>Loading Adventure...</p>
-</div>
-
-<!-- FAKE LIVE VISITOR -->
-<div id="liveVisitor" style="position:fixed;bottom:20px;left:20px;background:white;padding:14px 18px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,0.15);z-index:9999;font-size:14px;animation:fadeUp 1s ease;">
-🔥 3 people are viewing this tour now
-</div>
-
-<!-- LANGUAGE SWITCH -->
-<div style="position:fixed;top:20px;right:20px;z-index:99999;display:flex;gap:10px;">
-<button class="btn" onclick="changeLang('EN')">EN</button>
-<button class="btn" onclick="changeLang('ID')">ID</button>
-<button class="btn" onclick="changeLang('JP')">JP</button>
+<div id="welcomePopup">
+<button id="closePopup">✕</button>
+<img src="logo.png" class="popup-logo">
+<h1>CANLA Adventure</h1>
+<p>Hidden North Experience</p>
 </div>
 
 <header>
-<button onclick="closeHeader()" style="position:absolute;right:20px;top:15px;background:#8b5c42;color:white;border:none;width:35px;height:35px;border-radius:50%;cursor:pointer;">✕</button>
 <a href="#about">About</a>
 <a href="#packages">Packages</a>
 <a href="#gallery">Gallery</a>
 <a href="#booking">Booking</a>
-<a href="#guides">Guides</a>
-<a href="#review">Reviews</a>
+<a href="#reviews">Reviews</a>
 <a href="#contact">Contact</a>
 </header>
 
 <section class="hero">
-<div class="overlay">
-<img src="https://i.imgur.com/YOURLOGO.png" class="logo">
-<h1>CANLA ADVENTURE</h1>
-<p>
-Explore North Sulawesi through wildlife adventures,
-rainforest journeys, birdwatching experiences,
-and authentic local culture.
-</p>
+<div class="slide active" style="background-image:url('gallery1.jpg')"></div>
+<div class="slide" style="background-image:url('gallery2.jpg')"></div>
+<div class="slide" style="background-image:url('gallery3.jpg')"></div>
+<div class="overlay"></div>
+
+<div class="hero-content">
+<img src="logo.png" class="hero-logo">
+<h1>CANLA Adventure</h1>
+<p>Explore North Sulawesi through wildlife and local experiences.</p>
+<a href="#packages" class="hero-btn">Explore Tours</a>
 </div>
 </section>
 
 <section id="about" class="reveal">
-<h2>About CANLA ADVENTURE</h2>
-
-<div class="about-box">
-<p>
-CANLA ADVENTURE has been working in the tourism and guiding industry in North Sulawesi since around 2017.
-</p>
-
-<p>
-From wildlife photographers to families and adventure travelers,
-our team has experience creating safe and unforgettable journeys.
-</p>
-
-<p>
-We focus on authentic local experiences,
-wildlife conservation awareness,
-and comfortable private tours.
-</p>
+<h2 class="section-title">About CANLA Adventure</h2>
+<div class="card">
+CANLA Adventure is a North Sulawesi local travel experience specializing in wildlife, rainforest, birding, dolphin, mangrove, and hidden local culture experiences.
 </div>
 </section>
 
-<section id="packages" class="reveal-left">
-<h2>Travel Packages</h2>
-
-<div class="packages-grid">
-
-<div class="package-card pop-up">
-<h3>Interactive Tour Card</h3>
-<p>
-Click to explore detailed travel experiences with smooth animations.
-</p>
-<button class="btn">View Details</button>
-</div>
-
-<div class="package-card">
+<section id="packages" class="reveal">
+<h2 class="section-title">Travel Packages</h2>
+<div class="tour-grid">
+<div class="tour-card">
+<img src="gallery1.jpg">
+<div class="tour-info">
 <h3>Tangkoko Wildlife Tour</h3>
-<p>
-Discover tarsiers, black macaques,
-hornbills, and rare wildlife.
-</p>
+<p>Black macaques & tarsier experience</p>
+</div>
 </div>
 
-<div class="package-card">
-<h3>Birdwatching Tour</h3>
-<p>
-Special birding experience for endemic birds.
-</p>
+<div class="tour-card">
+<img src="gallery2.jpg">
+<div class="tour-info">
+<h3>Birding Tour</h3>
+<p>Hornbill and kingfisher spotting</p>
+</div>
 </div>
 
-<div class="package-card">
-<h3>Dolphin & Boat Tour</h3>
-<p>
-Beautiful sunrise and dolphin encounters.
-</p>
+<div class="tour-card">
+<img src="gallery3.jpg">
+<div class="tour-info">
+<h3>Dolphin Tour</h3>
+<p>Sunrise ocean adventure</p>
 </div>
-
-<div class="package-card">
-<h3>Tomohon Highland Tour</h3>
-<p>
-Volcano landscapes, lakes,
-and local culture experience.
-</p>
 </div>
-
 </div>
 </section>
 
-<section id="gallery" class="reveal-right">
-<h2>Gallery</h2>
-
-<div class="gallery-grid" id="galleryGrid">
-<img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=1000&auto=format&fit=crop" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000&auto=format&fit=crop" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop" onclick="openModal(this)">
-<img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=1000&auto=format&fit=crop" onclick="openModal(this)">
+<section id="gallery" class="reveal">
+<h2 class="section-title">Gallery</h2>
+<div class="gallery">
+<img src="gallery1.jpg" onclick="openModal(this.src)">
+<img src="gallery2.jpg" onclick="openModal(this.src)">
+<img src="gallery3.jpg" onclick="openModal(this.src)">
+<img src="gallery4.jpg" onclick="openModal(this.src)">
+<img src="gallery5.jpg" onclick="openModal(this.src)">
+<img src="gallery6.jpg" onclick="openModal(this.src)">
 </div>
 </section>
 
-<section id="booking" class="pop-up">
-<h2>Book Your Tour</h2>
+<div id="modal">
+<span id="modalClose">✕</span>
+<img id="modalImg">
+</div>
 
-<div class="booking-box">
+<section id="booking" class="reveal">
+<h2 class="section-title">Book Your Tour</h2>
+<div class="card">
+<form>
 <input type="text" placeholder="Full Name">
 <input type="text" placeholder="Country">
-<input type="email" placeholder="Email Address">
+<input type="email" placeholder="Email">
 <input type="text" placeholder="WhatsApp Number">
-
 <select>
 <option>Tangkoko Wildlife Tour</option>
-<option>Birdwatching Tour</option>
+<option>Birding Tour</option>
 <option>Dolphin Tour</option>
-<option>Tomohon Highland Tour</option>
 </select>
-
-<textarea placeholder="Special Request"></textarea>
-
-<button class="btn" onclick="sendWhatsApp()">
-Book Via WhatsApp
-</button>
+<textarea rows="5" placeholder="Special Request"></textarea>
+<button type="submit">Book via WhatsApp</button>
+</form>
 </div>
 </section>
 
-<section id="guides" class="reveal-left">
-<h2>Our Guides</h2>
-
-<div class="guides-grid">
-
-<div class="guide-card">
-<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop">
-<h3>Fabbyo Kakauhe</h3>
-<p>
-Professional and experienced wildlife guide specializing in North Sulawesi adventures.
-</p>
-</div>
-
-<div class="guide-card">
-<img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000&auto=format&fit=crop">
-<h3>Ober Kakauhe</h3>
-<p>
-Friendly local guide known for excellent wildlife spotting skills.
-</p>
-</div>
-
-</div>
-</section>
-
-<section id="review" class="reveal">
-<h2>Guest Rating & Reviews</h2>
-
-<div class="review-slider">
+<section id="reviews" class="reveal">
+<h2 class="section-title">Guest Reviews</h2>
+<div class="review-wrapper">
 <div class="review-track">
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Emily — Britain</h4>
-<small>April 14, 2026</small>
-<p>
-Everything was smooth from booking to the tour itself.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Daniel — Germany</h4>
+<small>May 14, 2023</small>
+<p>Amazing wildlife experience!</p>
 </div>
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Kevin — Indonesia</h4>
-<small>March 9, 2026</small>
-<p>
-Sunrise dolphin trip nya keren parah.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Hiroshi — Japan</h4>
+<small>April 11, 2025</small>
+<p>素晴らしい体験でした！</p>
 </div>
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Clara — Netherlands</h4>
-<small>January 18, 2026</small>
-<p>
-Very memorable experience.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Rian — Indonesia</h4>
+<small>January 6, 2026</small>
+<p>Tour paling seru selama di Sulawesi Utara.</p>
 </div>
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Hannah — Switzerland</h4>
-<small>February 21, 2026</small>
-<p>
-Fantastic local knowledge and beautiful landscapes.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Sarah — Netherlands</h4>
+<small>June 3, 2023</small>
+<p>Beautiful nature and friendly people.</p>
 </div>
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Adrian — Switzerland</h4>
-<small>December 9, 2025</small>
-<p>
-Wonderful local hospitality.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Daniel — Germany</h4>
+<small>May 14, 2023</small>
+<p>Amazing wildlife experience!</p>
 </div>
 
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Emily — Britain</h4>
-<small>April 14, 2026</small>
-<p>
-Everything was smooth from booking to the tour itself.
-</p>
-</div>
-
-<div class="review-card">
-<h4>⭐⭐⭐⭐⭐ Kevin — Indonesia</h4>
-<small>March 9, 2026</small>
-<p>
-Sunrise dolphin trip nya keren parah.
-</p>
+<div class="review">
+<h4>⭐⭐⭐⭐⭐ Hiroshi — Japan</h4>
+<small>April 11, 2025</small>
+<p>素晴らしい体験でした！</p>
 </div>
 
 </div>
-</div>
-
-<div class="review-form pop-up">
-<h3>Share Your Experience</h3>
-
-<input type="text" id="reviewName" placeholder="Your Name">
-<input type="text" id="reviewCountry" placeholder="Your Country">
-
-<select id="reviewRating">
-<option value="⭐">⭐ 1 Star</option>
-<option value="⭐⭐">⭐⭐ 2 Stars</option>
-<option value="⭐⭐⭐">⭐⭐⭐ 3 Stars</option>
-<option value="⭐⭐⭐⭐">⭐⭐⭐⭐ 4 Stars</option>
-<option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ 5 Stars</option>
-</select>
-
-<textarea id="reviewText" placeholder="Write your review here..."></textarea>
-
-<button class="btn" onclick="addReview()">
-Submit Review
-</button>
 </div>
 </section>
 
-<section id="contact" class="reveal-right">
-<h2>Contact</h2>
-
+<section id="contact" class="reveal">
+<h2 class="section-title">Contact</h2>
 <div class="contact-box">
-<p>
-<b>WhatsApp:</b><br>
-+62 812-3456-7890
-</p>
-
-<p>
-<b>Email:</b><br>
-canlaadventure@gmail.com
-</p>
+<p><b>WhatsApp:</b><br>+62 812-0000-0000</p>
+<br>
+<p><b>Email:</b><br>canlaadventure@gmail.com</p>
 </div>
 </section>
-
-<!-- MODAL GALLERY -->
-<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:99999;" onclick="closeModal()">
-<img id="modalImg" style="max-width:90%;max-height:90%;border-radius:25px;">
-</div>
 
 <footer>
-© 2026 CANLA ADVENTURE — Hidden North Experience
+© 2026 CANLA Adventure — Hidden North Experience
 </footer>
 
 <script>
 
-function openModal(img){
-document.getElementById('modal').style.display='flex';
-document.getElementById('modalImg').src=img.src;
+const popup = document.getElementById('welcomePopup');
+
+document.getElementById('closePopup').onclick = function(){
+popup.style.opacity='0';
+setTimeout(()=>{
+popup.style.display='none';
+},800);
 }
 
-function closeModal(){
+setTimeout(()=>{
+popup.style.opacity='0';
+setTimeout(()=>{
+popup.style.display='none';
+},800);
+},5000);
+
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+setInterval(()=>{
+slides[current].classList.remove('active');
+current++;
+if(current >= slides.length){
+current = 0;
+}
+slides[current].classList.add('active');
+},4000);
+
+function openModal(src){
+document.getElementById('modal').style.display='flex';
+document.getElementById('modalImg').src=src;
+}
+
+document.getElementById('modalClose').onclick = function(){
 document.getElementById('modal').style.display='none';
 }
 
-function closeHeader(){
-document.querySelector('header').style.display='none';
+const reveals = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', ()=>{
+reveals.forEach((el)=>{
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add('active');
 }
-
-
-function reveal(){
-
-const reveals = document.querySelectorAll(
-'.reveal, .reveal-left, .reveal-right, .pop-up'
-);
-
-for(let i = 0; i < reveals.length; i++){
-
-const windowHeight = window.innerHeight;
-
-const revealTop = reveals[i]
-.getBoundingClientRect().top;
-
-const revealPoint = 120;
-
-if(revealTop < windowHeight - revealPoint){
-reveals[i].classList.add('active');
-}
-
-}
-
-}
-
-window.addEventListener('scroll', reveal);
-window.addEventListener('load', reveal);
-
-window.addEventListener('load', function(){
-
-const savedReviews = localStorage.getItem('canlaReview');
-
-if(savedReviews){
-document.querySelector('.review-track').innerHTML = savedReviews;
-}
-
-setTimeout(function(){
-const loader = document.getElementById('loader');
-loader.style.opacity='0';
-setTimeout(function(){
-loader.style.display='none';
-},700);
-},1500);
 });
-
-function sendWhatsApp(){
-
-const message = `Hello CANLA Adventure!
-
-I would like to book a tour.
-
-━━━━━━━━━━━━━━━
-
-🌍 North Sulawesi Adventure Booking
-
-Please help me with:
-
-• Tour Package Information
-• Pricing Details
-• Available Dates
-• Transportation
-• Private / Group Tour
-• Custom Trip Request
-
-Thank you!`;
-
-window.open(
-`https://wa.me/6285753929818?text=${encodeURIComponent(message)}`,
-'_blank'
-);
-
-}`,
-'_blank'
-);
-
-}
-
-function changeLang(lang){
-alert('Language switched to ' + lang);
-}
-
-function addReview(){
-
-const name = document.getElementById('reviewName').value;
-const country = document.getElementById('reviewCountry').value;
-const rating = document.getElementById('reviewRating').value;
-const text = document.getElementById('reviewText').value;
-
-if(name === '' || country === '' || text === ''){
-alert('Please fill all fields');
-return;
-}
-
-const today = new Date().toLocaleDateString('en-US', {
-year:'numeric',
-month:'long',
-day:'numeric'
 });
-
-const reviewTrack = document.querySelector('.review-track');
-
-const newReview = document.createElement('div');
-
-newReview.className = 'review-card';
-
-newReview.innerHTML = `
-<h4>${rating} ${name} — ${country}</h4>
-<small>${today}</small>
-<p>${text}</p>
-`;
-
-reviewTrack.prepend(newReview);
-
-localStorage.setItem(
-'canlaReview',
-reviewTrack.innerHTML
-);
-
-alert('Review submitted successfully!');
-
-}
 
 </script>
 
 </body>
-</html>display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px
-}
-.gallery img{
-width:100%;
-height:260px;
-object-fit:cover;
-border-radius:20px;
-cursor:pointer;
-transition:.3s
-}
-.gallery img:hover{transform:scale(1.03)}
-
-.guide-photo{
-width:100%;
-max-width:420px;
-border-radius:20px;
-margin-bottom:20px
-}
-
-input,select,textarea{
-width:100%;
-padding:16px;
-margin-bottom:18px;
-border-radius:14px;
-border:1px solid #ddd
-}
-textarea{height:140px}
-
-.modal{
-display:none;
-position:fixed;
-left:0;top:0;
-width:100%;height:100%;
-background:rgba(0,0,0,.92);
-justify-content:center;
-align-items:center;
-z-index:9999
-}
-.modal img{
-max-width:90%;
-max-height:90%;
-border-radius:20px
-}
-
-footer{
-background:#3a2415;
-color:white;
-text-align:center;
-padding:35px
-}
-
-@media(max-width:768px){
-.overlay h1{font-size:42px}
-.brand{width:95%}
-}
-#loader{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#3a2415;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:99999;
-color:white;
-transition:1s;
-}
-
-#loader img{
-width:170px;
-margin-bottom:20px;
-animation:popLogo 1.2s infinite alternate;
-}
-
-#loader h1{
-font-size:42px;
-margin-bottom:10px;
-letter-spacing:2px;
-}
-
-#loader p{
-font-size:18px;
-opacity:0.8;
-}
-
-@keyframes popLogo{
-from{
-transform:scale(0.9);
-opacity:0.7;
-}
-to{
-transform:scale(1.05);
-opacity:1;
-}
-}
-
-</style>
-</head>
-<body>
-<div id="loader">
-
-<img src="images/logo.png">
-
-<h1>CANLA Adventure</h1>
-
-<p>Explore North Sulawesi</p>
-
-</div>
-
-<header>
-
-<div id="topHeader">
-    <button id="closeHeader" onclick="document.getElementById('topHeader').style.display='none'">✕</button>
-    <img src="images/brand.png" class="brand">
-</div>
-
-<nav>
-<a href="#about">About</a>
-<a href="#packages">Packages</a>
-<a href="#gallery">Gallery</a>
-<a href="#booking">Booking</a>
-<a href="#guides">Guides</a>
-<a href="#contact">Contact</a>
-</nav>
-</header>
-
-<section class="hero">
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-<div class="slide"></div>
-
-<div class="overlay">
-<img src="images/logo.png" class="hero-logo">
-<h1>Hidden North Experience</h1>
-<p>Explore North Sulawesi through wildlife adventures, rainforest journeys, birding experiences, and authentic local culture.</p>
-<a href="#booking" class="btn">Book Your Adventure</a>
-</div>
-</section>
-
-<section id="about">
-<h2>About CANLA ADVENTURE</h2>
-<div class="card">
-<p>CANLA ADVENTURE has been working in the tourism and guiding industry in North Sulawesi since around 2017. At that time there was no official name and no plan to create a travel brand like today.</p><br>
-<p>Over the years, CANLA ADVENTURE has professionally handled many guests from Indonesia and from countries around the world. From wildlife photographers to families and adventure travelers, our team has experience creating safe and unforgettable journeys.</p><br>
-<p>Although the name CANLA ADVENTURE was officially created in 2023, it is only now being publicly introduced as a professional local travel experience.</p>
-</div>
-</section>
-
-<section id="packages">
-<h2>Travel Packages</h2>
-
-<div class="card"><h3>Tangkoko Wildlife Tour</h3><p>Discover Sulawesi Crested Black Macaque, Tarsius Spectral Gursky, Bear Cuscus, and Knobbed Hornbill.</p></div>
-
-<div class="card"><h3>Tangkoko Birding Tour</h3><p>Special birdwatching experience focused on endemic birds from Tangkoko Nature Reserve.</p></div>
-
-<div class="card"><h3>Tangkoko Boat Tour Mangrove & Hot Spring</h3><p>Mangrove exploration combined with relaxing hot spring experiences and coastal scenery.</p></div>
-
-<div class="card"><h3>Batuangus & Dolphin Seek Tour</h3><p>Enjoy sunrise moments and search for dolphins around North Sulawesi coastline.</p></div>
-
-<div class="card"><h3>Tomohon & Tondano Highland Tour</h3><p>Explore volcano landscapes, mountain atmosphere, lakes, flower gardens, and local culture.</p></div>
-</section>
-
-<section id="gallery">
-<h2>Gallery</h2>
-<div class="gallery">
-<img src="images/g1.jpg" onclick="openModal(this)">
-<img src="images/g2.jpg" onclick="openModal(this)">
-<img src="images/g3.jpg" onclick="openModal(this)">
-<img src="images/g4.jpg" onclick="openModal(this)">
-<img src="images/g5.jpg" onclick="openModal(this)">
-<img src="images/g6.jpg" onclick="openModal(this)">
-<img src="images/g7.jpg" onclick="openModal(this)">
-<img src="images/g8.jpg" onclick="openModal(this)">
-<img src="images/g9.jpg" onclick="openModal(this)">
-</div>
-</section>
-
-<section id="booking">
-
-<h2>Book Your Tour</h2>
-
-<div class="booking-box">
-
-<form id="bookingForm">
-
-<input type="text" id="fullname" placeholder="Full Name" required>
-
-<input type="text" id="country" placeholder="Country">
-
-<input type="email" id="email" placeholder="Email Address">
-
-<input type="text" id="whatsapp" placeholder="WhatsApp Number">
-
-<select id="package">
-<option>Tangkoko Wildlife Tour</option>
-<option>Tangkoko Birding Tour</option>
-<option>Tangkoko Boat Tour Mangrove & Hot Spring</option>
-<option>Batuangus & Dolphin Seek Tour</option>
-<option>Tomohon & Tondano Highland Tour</option>
-<option>Custom Trip</option>
-</select>
-
-<input type="date" id="date">
-
-<input type="number" id="participants" placeholder="Number of Participants">
-
-<div class="check-options">
-
-<label>
-<input type="checkbox" id="pickup">
-Airport Pickup
-</label>
-
-<label>
-<input type="checkbox" id="hotel">
-Hotel Included
-</label>
-
-<label>
-<input type="checkbox" id="custom">
-Custom Trip
-</label>
-
-</div>
-
-<textarea id="request" placeholder="Special Request"></textarea>
-
-<button type="button" class="btn" onclick="sendWhatsApp()">
-Book Via WhatsApp
-</button>
-
-<!-- WHATSAPP DIRECT -->
-<div class="booking-contact">
-
-<p>Or contact us directly:</p>
-
-<a href="https://wa.me/6285753929818" target="_blank" class="wa-direct">
-📱 WhatsApp Admin
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</section>
-
-<script>
-
-function sendWhatsApp() {
-
-const fullname = document.getElementById("fullname").value;
-const country = document.getElementById("country").value;
-const email = document.getElementById("email").value;
-const whatsapp = document.getElementById("whatsapp").value;
-const packageName = document.getElementById("package").value;
-const date = document.getElementById("date").value;
-const participants = document.getElementById("participants").value;
-const request = document.getElementById("request").value;
-
-let extras = [];
-
-if (document.getElementById("pickup").checked) {
-extras.push("Airport Pickup");
-}
-
-if (document.getElementById("hotel").checked) {
-extras.push("Hotel Included");
-}
-
-if (document.getElementById("custom").checked) {
-extras.push("Custom Trip");
-}
-
-const extraText =
-extras.length > 0
-? extras.join(", ")
-: "None";
-
-const message =
-`Hello CANLA Adventure!
-
-I would like to book a tour.
-
-━━━━━━━━━━━━━━━
-
-👤 Full Name:
-${fullname}
-
-🌍 Country:
-${country}
-
-📧 Email:
-${email}
-
-📱 WhatsApp:
-${whatsapp}
-
-🎒 Selected Package:
-${packageName}
-
-📅 Tour Date:
-${date}
-
-👥 Participants:
-${participants}
-
-✨ Additional Options:
-${extraText}
-
-📝 Special Request:
-${request}
-
-━━━━━━━━━━━━━━━
-
-Thank you!`;
-
-const whatsappURL =
-`https://wa.me/6285753929818?text=${encodeURIComponent(message)}`;
-
-window.open(whatsappURL, '_blank');
-
-}
-
-</script>
-
-<section id="guides">
-<h2>Our Guides</h2>
-
-<div class="guide-card">
-<h3>Ober Kakauhe</h3>
-<p>Highly experienced local guide specializing in Wildlife Tours, Boat Tours, Dolphin Seek Tours, and Batuangus coastal experiences. Fluent in English and known for his friendly personality, humor, and warm smile.</p>
-</div>
-
-<div class="guide-card">
-<img src="images/fabbyo.jpg" class="guide-photo">
-<h3>Fabbyo Kakauhe</h3>
-<p>Professional and experienced guide specializing in Wildlife Tours and Tomohon & Tondano Highland Tours. Fluent in English and well-known for his cheerful personality, humor, and friendly approach to guests.</p>
-</div>
-
-<section id="review">
-
-<h2>Guest Rating & Review</h2>
-
-<div class="review-box">
-
-<h3>Share Your Experience</h3>
-
-<input type="text" id="reviewName" placeholder="Your Name">
-<input type="text" id="reviewCountry" placeholder="Your Country">
-
-<select id="reviewRating">
-<option value="⭐">⭐ 1 Star</option>
-<option value="⭐⭐">⭐⭐ 2 Stars</option>
-<option value="⭐⭐⭐">⭐⭐⭐ 3 Stars</option>
-<option value="⭐⭐⭐⭐">⭐⭐⭐⭐ 4 Stars</option>
-<option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐ 5 Stars</option>
-</select>
-
-<textarea id="reviewText"
-placeholder="Write your review here..."></textarea>
-
-<button class="btn" onclick="addReview()">
-Submit Review
-</button>
-
-<div id="reviewList" style="max-height:1500px; overflow:hidden; display:flex; flex-direction:column-reverse;">
- <div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Daniel — Germany</h4>
-<small>May 14, 2023</small>
-<p>Amazing wildlife experience! We saw tarsiers, black macaques, hornbills, and even bear cuscus in one tour. Highly recommended local guides.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Sarah — Netherlands</h4>
-<small>June 3, 2023</small>
-<p>Beautiful nature and very friendly people.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Michael — Switzerland</h4>
-<small>July 27, 2023</small>
-<p>The guides were very professional and knew exactly where to find the animals. We managed to see all the exclusive wildlife of Tangkoko in only one morning. Truly unforgettable.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Emma — Britain</h4>
-<small>August 11, 2023</small>
-<p>Fantastic experience and amazing atmosphere in the jungle.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Lukas — Germany</h4>
-<small>September 18, 2023</small>
-<p>Our family joined the Tangkoko Wildlife Tour and it exceeded expectations. The guides were funny, patient, and excellent at spotting wildlife. Seeing the tarsiers at sunset was magical.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Sophie — Netherlands</h4>
-<small>October 5, 2023</small>
-<p>The birding tour was incredible. We saw hornbills, kingfishers, and many endemic birds.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Hiroshi — Japan</h4>
-<small>November 20, 2023</small>
-<p>ガイドさんはとても親切で、ターシャを見ることができました。本当に素晴らしい体験でした。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Wei Chen — China</h4>
-<small>December 8, 2023</small>
-<p>这是一次非常难忘的旅行。我们看到了眼镜猴和很多稀有动物，导游非常专业。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Oliver — Britain</h4>
-<small>January 14, 2024</small>
-<p>Excellent communication from booking until the end of the tour.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Noah — Switzerland</h4>
-<small>February 2, 2024</small>
-<p>The mangrove and hot spring tour was relaxing and beautiful. Perfect combination after wildlife trekking.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Anna — Germany</h4>
-<small>March 21, 2024</small>
-<p>Very organized trip and wonderful local experience. The guides really know the forest deeply and shared many interesting stories about Sulawesi wildlife and culture.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Takumi — Japan</h4>
-<small>April 6, 2024</small>
-<p>最高のツアーでした！自然も動物も本当に素晴らしかったです。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Charlotte — Netherlands</h4>
-<small>May 10, 2024</small>
-<p>The sunrise dolphin trip was absolutely beautiful.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Leon — Germany</h4>
-<small>June 18, 2024</small>
-<p>We visited Tangkoko for photography and the guides helped us find black macaques, hornbills, and tarsiers in great light conditions. Incredible experience for wildlife photographers.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Isabelle — Switzerland</h4>
-<small>July 30, 2024</small>
-<p>Friendly people and amazing food during the tour.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Liam — Britain</h4>
-<small>August 16, 2024</small>
-<p>One of the best wildlife experiences we ever had in Southeast Asia.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Yuki — Japan</h4>
-<small>September 4, 2024</small>
-<p>スタッフの皆さんが優しくて安心できました。自然が本当に美しかったです。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Ethan — Britain</h4>
-<small>October 22, 2024</small>
-<p>The custom trip arrangement was smooth and flexible. We loved every part of the adventure.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Lin Xia — China</h4>
-<small>November 13, 2024</small>
-<p>风景非常漂亮，导游很热情，我们拍到了很多野生动物照片。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Mia — Germany</h4>
-<small>December 28, 2024</small>
-<p>Perfect organization and unforgettable memories in North Sulawesi.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Benjamin — Netherlands</h4>
-<small>January 17, 2025</small>
-<p>We explored mangroves, hot springs, and wildlife areas in one trip. Everything was well prepared and comfortable.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Sophie — Switzerland</h4>
-<small>February 9, 2025</small>
-<p>A peaceful and authentic local experience.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Arthur — Britain</h4>
-<small>March 2, 2025</small>
-<p>The guides were extremely knowledgeable about wildlife behavior. We saw tarsiers very closely without disturbing them, which showed great respect for nature.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Kenji — Japan</h4>
-<small>April 11, 2025</small>
-<p>素晴らしいガイドと美しい景色でした。また来たいです！</p>
-</div>
-
-    <div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Dimas — Indonesia</h4>
-<small>May 3, 2025</small>
-<p>Guide nya asik banget dan ngerti lokasi hewan-hewan di Tangkoko. Recommended.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Sophie — Germany</h4>
-<small>May 19, 2025</small>
-<p>Wonderful experience in the rainforest. We saw black macaques and hornbills very closely.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Jonathan — Britain</h4>
-<small>June 8, 2025</small>
-<p>The guides were knowledgeable and made the whole trip enjoyable. Tangkoko is truly special.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Aiko — Japan</h4>
-<small>June 24, 2025</small>
-<p>自然がとても美しく、ガイドさんも優しかったです。最高の体験でした。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Marco — Netherlands</h4>
-<small>July 4, 2025</small>
-<p>Everything was perfectly arranged. The sunrise dolphin tour was unforgettable.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Nanda — Indonesia</h4>
-<small>July 27, 2025</small>
-<p>Hot spring tour nya relaxing banget setelah trekking di hutan.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Felix — Switzerland</h4>
-<small>August 12, 2025</small>
-<p>Professional guides and amazing wildlife encounters. We managed to photograph tarsiers and hornbills in one evening.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Chen Yu — China</h4>
-<small>August 30, 2025</small>
-<p>导游非常专业，我们看到了很多野生动物，非常满意。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Olivia — Britain</h4>
-<small>September 10, 2025</small>
-<p>One of the best wildlife tours we have ever experienced in Southeast Asia.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Rizky — Indonesia</h4>
-<small>September 28, 2025</small>
-<p>Worth it banget. Bisa lihat tarsius langsung dan suasana hutannya masih alami.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Emma — Netherlands</h4>
-<small>October 7, 2025</small>
-<p>The mangrove boat experience was peaceful and beautiful. Friendly local guides.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Farhan — Indonesia</h4>
-<small>October 26, 2025</small>
-<p>Booking gampang dan tour guide nya sangat membantu dari awal sampai akhir.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Lukas — Germany</h4>
-<small>November 11, 2025</small>
-<p>Excellent wildlife spotting skills from the guides. We saw every animal we hoped for.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Naomi — Japan</h4>
-<small>November 25, 2025</small>
-<p>ターシャを見ることができて感動しました。また来たいです。</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Adrian — Switzerland</h4>
-<small>December 9, 2025</small>
-<p>The custom private tour was excellent. Great communication and wonderful local hospitality.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Siska — Indonesia</h4>
-<small>December 28, 2025</small>
-<p>Liburan paling memorable tahun ini. Alam Sulawesi Utara keren banget.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Rian — Indonesia</h4>
-<small>January 6, 2026</small>
-<p>Tour paling seru selama di Sulawesi Utara. Guide ramah dan tau banget lokasi hewan-hewan liar.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Clara — Netherlands</h4>
-<small>January 18, 2026</small>
-<p>Very memorable experience. The tarsiers were absolutely adorable and the guides were excellent.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Budi Santoso — Indonesia</h4>
-<small>February 2, 2026</small>
-<p>Keren banget. Baru pertama kali lihat tarsius langsung di habitat aslinya.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Hannah — Switzerland</h4>
-<small>February 21, 2026</small>
-<p>The birdwatching tour exceeded expectations. Fantastic local knowledge and beautiful landscapes.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Kevin — Indonesia</h4>
-<small>March 9, 2026</small>
-<p>Sunrise dolphin trip nya keren parah. Recommended banget buat yang suka alam.</p>
-</div>
-
-<div style="background:white;padding:20px;border-radius:20px;margin-top:20px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
-<h4>⭐⭐⭐⭐⭐ Emily — Britain</h4>
-<small>April 14, 2026</small>
-<p>Everything was smooth from booking to the tour itself. One of the best wildlife trips I've had.</p>
-</div>
-    
-  
-</div>
-
-<button class="btn"
-onclick="toggleReviews()"
-id="reviewBtn">
-
-Show More Reviews
-
-</button>
-
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-<div class="card">
-<p><strong>WhatsApp:</strong><br>
-+62 857-5392-9818<br>
-+62 821-5670-1902</p><br>
-
-<p><strong>Email:</strong><br>
-fabiokakauhe@gmail.com<br>
-sheillaamanda186@gmail.com<br>
-canlaadventure@gmail.com</p>
-</div>
-</section>
-
-<div id="modal" class="modal" onclick="closeModal()">
-<img id="modal-img">
-</div>
-
-<footer>
-© 2026 CANLA ADVENTURE — Hidden North Experience
-</footer>
-
-<script>
-
-function openModal(img){
-document.getElementById("modal").style.display = "flex";
-document.getElementById("modal-img").src = img.src;
-}
-
-function closeModal(){
-document.getElementById("modal").style.display = "none";
-}
-
-window.addEventListener("load", function(){
-
-setTimeout(function(){
-
-const loader = document.getElementById("loader");
-
-if(loader){
-loader.style.opacity = "0";
-
-setTimeout(function(){
-loader.style.display = "none";
-}, 500);
-
-}
-
-}, 1500);
-
-});
-
-function addReview(){
-
-const name = document.getElementById("reviewName").value;
-
-const country = document.getElementById("reviewCountry").value;
-
-const rating = document.getElementById("reviewRating").value;
-
-const text = document.getElementById("reviewText").value;
-
-const today = new Date().toLocaleDateString("en-US", {
-year: "numeric",
-month: "long",
-day: "numeric"
-});
-
-if(name === "" || country === "" || text === ""){
-alert("Please fill all fields");
-return;
-}
-
-const reviewList = document.getElementById("reviewList");
-
-const newReview = document.createElement("div");
-
-newReview.innerHTML = `
-<div style="
-background:white;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-">
-
-<h4>${rating} ${name} — ${country}</h4>
-
-<small>${today}</small>
-
-<p>${text}</p>
-
-</div>
-`;
-
-reviewList.prepend(newReview);
-
-document.getElementById("reviewName").value = "";
-document.getElementById("reviewCountry").value = "";
-document.getElementById("reviewText").value = "";
-
-}
-
-let reviewsOpen = false;
-
-function toggleReviews(){
-
-const reviewList = document.getElementById("reviewList");
-
-const btn = document.getElementById("reviewBtn");
-
-if(reviewsOpen){
-
-reviewList.style.maxHeight = "700px";
-
-btn.innerText = "Show More Reviews";
-
-reviewsOpen = false;
-
-}else{
-
-reviewList.style.maxHeight = "10000px";
-
-btn.innerText = "Hide Reviews";
-
-reviewsOpen = true;
-
-}
-
-}
-
-    </script>
-
-</body>
-</html>
+    </html>q
